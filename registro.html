@@ -93,7 +93,7 @@
         }
 
         // Escuchar cambios en la base de datos y actualizar la lista
-        onValue(ref(database, 'juegosPC'), (snapshot) => {
+        onValue(ref(database, 'juegosPC_Figueroa'), (snapshot) => {
             const listaRegistros = document.getElementById('lista-registros');
             listaRegistros.innerHTML = '';
 
@@ -126,7 +126,7 @@
             const nuevaClasificacionEdad = prompt('Editar clasificación de edad:', clasificacionEdad);
 
             if (nuevoNombre !== null && nuevaPlataforma !== null && nuevoGenero !== null && nuevaFechaLanzamiento !== null && nuevaClasificacionEdad !== null) {
-                update(ref(database, `juegosPC/${key}`), {
+                update(ref(database, `juegosPC_Figueroa/${key}`), {
                     nombre: nuevoNombre,
                     plataforma: nuevaPlataforma,
                     genero: nuevoGenero,
@@ -140,7 +140,7 @@
             const confirmacion = confirm('¿Seguro que desea eliminar este registro?');
 
             if (confirmacion) {
-                remove(ref(database, `juegosPC/${key}`));
+                remove(ref(database, `juegosPC_Figueroa/${key}`));
             }
         }
     </script>
