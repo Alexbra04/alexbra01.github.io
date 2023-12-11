@@ -52,7 +52,7 @@ label {
 input,
 select,
 button {
-    width: 15%;
+    width: 100%;
     padding: 10px;
     margin-bottom: 15px;
     box-sizing: border-box;
