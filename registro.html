@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .contenedor {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .Menu2 a {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #crud-form {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select,
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        #lista-registros {
+            list-style: none;
+            padding: 0;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        li {
+            background-color: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        li button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="cabecera">
+        <section id="texto1">
+            <div class="contenedor">
+                <a href="index.html" title="Pagina de inicio">
+                    <img class="logo" src="img/logo.jpg" alt="Technologia inovando en el mundo">
+                </a>
+                <nav class="Menu2">
+                    <a href="inicio.html">Incio</a>
+                    <a href="contacto.html">Contactos</a>
+                    <a href="servicios.html">Servicios</a>
+                    <a href="paredes.html">Paredes</a>
+                    <a href="galeria.html">Galeria</a>
+                </nav>
+            </div>
+        </section>
+    </header>
+    <h1>REGISTRO DE JUEGOS</h1>
+    <form id="crud-form">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre">
+        <label for="plataforma">Plataforma:</label>
+        <input type="text" id="plataforma">
+        <label for="genero">Género:</label>
+        <input type="text" id="genero">
+        <label for="fechaLanzamiento">Fecha de Lanzamiento:</label>
+        <input type="date" id="fechaLanzamiento">
+        <label for="clasificacionEdad">Clasificación de Edad:</label>
+        <select id="clasificacionEdad">
+            <option value="Todos">Todos</option>
+            <option value="Adolescentes">Adolescentes (13+)</option>
+            <option value="Adultos">Adultos (17+)</option>
+        </select>
+        <button type="button" onclick="crearRegistro()">Crear</button>
+    </form>
+
+    <ul id="lista-registros"></ul>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+        import { getDatabase, ref, push, onValue, remove, update } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBMJsVpnbOwVOiVNbTZScZdet9qlGigDL0",
+            authDomain: "conexion-8ec0d.firebaseapp.com",
+            databaseURL: "https://conexion-8ec0d-default-rtdb.firebaseio.com",
+            projectId: "conexion-8ec0d",
+            storageBucket: "conexion-8ec0d.appspot.com",
+            messagingSenderId: "679910299749",
+            appId: "1:679910299749:web:9800b464879628b4850e8c"
+        };
+        
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        window.crearRegistro = function () {
+            const nombre = document.getElementById("nombre").value;
+            const plataforma = document.getElementById("plataforma").value;
+            const genero = document.getElementById("genero").value;
+            const fechaLanzamiento = document.getElementById("fechaLanzamiento").value;
+            const clasificacionEdad = document.getElementById("clasificacionEdad").value;
+
+            push(
+                ref(database, 'juegosPC'),
+                {
+                    nombre: nombre,
+                    plataforma: plataforma,
+                    genero: genero,
+                    fechaLanzamiento: fechaLanzamiento,
+                    clasificacionEdad: clasificacionEdad
+                }
+            );
+
+            // Limpiar los campos después de agregar
+            document.getElementById('nombre').value = '';
+            document.getElementById('plataforma').value = '';
+            document.getElementById('genero').value = '';
+            document.getElementById('fechaLanzamiento').value = '';
+            document.getElementById('clasificacionEdad').value = '';
+        }
+
+        // Escuchar cambios en la base de datos y actualizar la lista
+        onValue(ref(database, 'juegosPC'), (snapshot) => {
+            const listaRegistros = document.getElementById('lista-registros');
+            listaRegistros.innerHTML = '';
+
+            snapshot.forEach((childSnapshot) => {
+                const registro = childSnapshot.val();
+                const li = document.createElement('li');
+                li.textContent = `Nombre: ${registro.nombre}, Plataforma: ${registro.plataforma}, Género: ${registro.genero}, Fecha de Lanzamiento: ${registro.fechaLanzamiento}, Clasificación de Edad: ${registro.clasificacionEdad}`;
+
+                // Botones para editar y eliminar
+                const btnEditar = document.createElement('button');
+                btnEditar.textContent = 'Editar';
+                btnEditar.addEventListener('click', () => editarRegistro(childSnapshot.key, registro.nombre, registro.plataforma, registro.genero, registro.fechaLanzamiento, registro.clasificacionEdad));
+
+                const btnEliminar = document.createElement('button');
+                btnEliminar.textContent = 'Eliminar';
+                btnEliminar.addEventListener('click', () => eliminarRegistro(childSnapshot.key));
+
+                li.appendChild(btnEditar);
+                li.appendChild(btnEliminar);
+
+                listaRegistros.appendChild(li);
+            });
+        });
+
+        window.editarRegistro = function (key, nombre, plataforma, genero, fechaLanzamiento, clasificacionEdad) {
+            const nuevoNombre = prompt('Editar nombre:', nombre);
+            const nuevaPlataforma = prompt('Editar plataforma:', plataforma);
+            const nuevoGenero = prompt('Editar género:', genero);
+            const nuevaFechaLanzamiento = prompt('Editar fecha de lanzamiento:', fechaLanzamiento);
+            const nuevaClasificacionEdad = prompt('Editar clasificación de edad:', clasificacionEdad);
+
+            if (nuevoNombre !== null && nuevaPlataforma !== null && nuevoGenero !== null && nuevaFechaLanzamiento !== null && nuevaClasificacionEdad !== null) {
+                update(ref(database, `juegosPC/${key}`), {
+                    nombre: nuevoNombre,
+                    plataforma: nuevaPlataforma,
+                    genero: nuevoGenero,
+                    fechaLanzamiento: nuevaFechaLanzamiento,
+                    clasificacionEdad: nuevaClasificacionEdad
+                });
+            }
+        }
+
+        window.eliminarRegistro = function (key) {
+            const confirmacion = confirm('¿Seguro que desea eliminar este registro?');
+
+            if (confirmacion) {
+                remove(ref(database, `juegosPC/${key}`));
+            }
+        }
+    </script>
+</body>
+
+</html>

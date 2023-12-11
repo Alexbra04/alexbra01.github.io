@@ -1,0 +1,257 @@
+body
+{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.contenedor
+{
+    width: 950px;
+    padding: 0 15px 0 15px;
+    margin: 0 auto;
+}
+
+.imagen
+{
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.sin-pading/*altera solo las imagenes de servicios*/
+{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.contenedor .cuadrado /*parte interna de los graficos*/
+{
+    width: 100%;
+    height: 100%;
+}
+
+.contenedor .cuadrado img
+{
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;     /*cubre los espacios para complementar las imagenes */
+    object-position: center;  /*position: absolute;  */ 
+    filter: grayscale(1);  /*imagenes blanco y negro*/
+    opacity: 0.5; /*opacidad*/
+}
+
+a
+{
+    display: inline-block;
+}
+
+.cabecera
+{
+    padding-top: 10px ;
+    padding-bottom: 10px;
+    /*background:#FFABAB;*/
+    position: fixed; /*para que el encabezado se quede estatica y lo demas de la pagina sea movil  FIXED*/
+    top: 0;/*tope*/
+    left: 0;/*alineaso a la izquierda*/
+    width: 100%; /*cubra toda la pagina*/
+    z-index: 99; /*controlar si esta atras o adelante de algo*/
+}
+
+.cabecera .contenedor
+{
+    display: flex; /*controla el eje de las y (secundario)*/
+    /*justify-content: space-around;  envia los elementos a los extremos*/
+    justify-content: space-between;  /*separa los elementos aun mas que el around*/
+}
+
+
+/*.cabecera .menu
+{
+    display: inline-block;
+    vertical-align: middle;          SE DEJA DE USAR ESTA CLASE PARA USAR LA CLASE CABECERA .CONTENEDOR  usando flex
+    margin-left: 28%;
+    text-align: center;
+}*/
+
+
+.cabecera .menu a
+{
+    margin-right: 10px;
+    margin-left: 10px;
+    color: #f8a82f;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    text-decoration: none; /*eliminar lineas bajo los nombres del menu*/
+}
+.cabecera .logo
+{
+    display: inline-block;
+    vertical-align: middle;
+    height: 70px;
+}
+
+.columna 
+{
+    padding-left: 15px;
+    padding-right: 15px;
+    /*display: inline-block;
+    vertical-align: top;*/ 
+}
+
+/*
+.columna-servicio
+{
+    padding-left: 0;
+    padding-right: 0;
+    display: inline-block;
+    vertical-align: top;
+} 
+*/ 
+/*
+el tamaño de las columnas
+*/
+.columna-100
+{
+    width: 100%;
+}
+.columna-50
+{
+    width: 50%;
+}
+.columna-48
+{
+    width: 46%;
+}
+.columna-33
+{
+    width: 30%;
+}
+.columna-25
+{
+    width: 25%;
+}
+
+.columna-23
+{
+    width: 23%;
+}
+/* texto centrado */
+.texto-centrar
+{
+    text-align: center;
+}
+
+/*texto a la derecha*/
+.texto-derecha
+{
+    text-align: right;
+}
+
+/*separacion del limite de la tabla al texto*/
+.texto
+{
+    padding-top: 75px;
+}
+
+/*parrafo justificado*/
+.texto-justificar
+{
+    text-align: justify;
+}
+
+
+.fila
+{
+    margin-left: -15px;/*quitar margen innecesario de 15px*/
+    margin-right: -15px;
+    display: flex; /*FLEXBOX: tecnica de estructuracion*/
+    /*align-items: stretch; internamente el tamaño de la columna toma el que tenga el mayor tamaño*/
+    /*align-items: center; internamente el tamaño de la columna toma el que tenga el mayor tamaño y lo centra*/
+    /*align-items: flex-start; internamente el tamaño de la columna original del texto*/
+    /*align-items: flex-end; internamente el tamaño de la columna toma como referencia de abajo hacia arriba*/
+    flex-wrap: wrap; /*las imagenes van a la siguiente fila*/
+    justify-content: space-between;
+}
+
+.fila-img
+{
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.columna-img
+{
+    padding-left: 2px;
+    padding-right: 2px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.imagen-galeria
+{
+    width: 100%;
+    height: 300px;
+    display: block;
+}
+.imagen1-galeria
+{
+    width: 23%;
+}
+
+section
+{
+    position: relative;
+}
+
+#imagen-fondo /*para un ID se usa numeral*/
+{
+    background-image: url("../img/trama1.jpg"); /*cuando la imagen esta a un mismo nivel de la carpeta index(carpeta usada)*/
+}
+#texto1 .contenedor
+{
+    position: absolute;
+    top: 50%; /*el margen cuenta desde el borde superior del menu */
+    left: 0; /*aliner al inicio del contenedor*/
+    right: 0; /*aliner al inicio del contenedor*/
+}
+#texto1 .contenedor h1
+{
+    font-size: 45px;
+    color: #2c80e1;
+    border: 3px solid #2c80e1;/*3 parametros: grosor, tipo de linea(ejm.solido), color*/
+}
+#texto1 .contenedor h2
+{
+    font-size: 15px;
+    color: #2c80e1;
+}
+#texto1 .fila a
+{
+    border-radius: 100%;
+    text-decoration: none; /*eliminar lineas bajo los nombres del hiper*/
+    border: 3px solid #041425;/*3 parametros: grosor, tipo de linea(ejm.solido), color*/
+}
+#texto1 .menu a
+{
+    font-size: 15px;
+    color: #041425;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-decoration: none; /*eliminar lineas bajo los nombres del menu*/
+}
+.icono
+{
+    color: #2c80e1;
+    font-size: 15px;
+}
+
+.icono2 /**/
+{
+    color: #f8a82f;
+    font-size: 40px;
+    border: 3px solid #f82f5b;
+    border-radius: 50px;
+}
+.titulos
+{
+    font-size: 30px;
+    text-shadow: 0px -6px 3px #2c80e1;
+}
