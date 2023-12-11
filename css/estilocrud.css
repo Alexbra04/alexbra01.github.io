@@ -5,8 +5,15 @@ body {
     padding: 0;
 }
 
+.cabecera .logo
+{
+    display: inline-block;
+    vertical-align: middle;
+    height: 70px;
+}
+
 header {
-    background-color: #a10cf2;
+    background-color: #c98dea;
     color: rgb(13, 7, 186);
     padding: 10px;
     text-align: center;
@@ -53,7 +60,7 @@ button {
 
 button {
     background-color: #f30e25;
-    color: rgb(142, 9, 9);
+    color: rgb(0, 0, 0);
     border: none;
     padding: 10px;
     cursor: pointer;
